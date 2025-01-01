@@ -1,265 +1,309 @@
 <div class="container mt-5">
-  <h3>Profile</h3>
-  <div class="row">
-    <div class="profile-form">
-      <div class="row">
-        <div class="form-group col-lg-2">
-          <label for="profile_source">Source</label>
-          <input
-            id="profile_source"
-            type="text"
-            class="form-control"
-            name="profile_source"
-            [(ngModel)]="profile.profile_source"
-          />
-        </div>
-        <div class="form-group col-lg-3">
-          <label for="address">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="profile.profile_name"
-            id="address"
-            required
-          />
-        </div>
+    <h3>Profile</h3>
+    <div class="row">
+        <div class="profile-form">
+            <div class="row">
+                <!-- <div class="form-group col-lg-2">
+                    <label for="profile_source">Source</label>
+                    <input
+                        id="profile_source"
+                        type="text"
+                        class="form-control"
+                        name="profile_source"
+                        [(ngModel)]="profile.profile_source"
+                    />
+                </div> -->
+                <div class="form-group col-lg-3">
+                    <label for="address">Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="profile.profile_name" id="address" required />
+                </div>
 
-        <div class="form-group col-lg-1">
-          <label for="">Gender</label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.gendar"
-          >
-            <option *ngFor="let option of gender" [value]="option.value">
-              {{ option.label }}
-            </option>
-          </select>
-        </div>
+                <div class="form-group col-lg-2">
+                    <label for="dob">DOB</label>
+                    <input id="dob" type="date" class="form-control" name="dob" [(ngModel)]="profile.dob"
+                        (ngModelChange)="setAge(profile.dob)" />
+                </div>
 
-        <div class="form-group col-lg-2">
-          <label for="profile_type">Type</label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.profile_type"
-          >
-            <option *ngFor="let option of type" [value]="option.value">
-              {{ option.label }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="caste_sect">Sect</label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.caste_sect"
-          >
-            <option *ngFor="let option of caste" [value]="option.value">
-              {{ option.label }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="subsect">Sub Caste</label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.subsect"
-          >
-            <option *ngFor="let option of subcaste" [value]="option.value">
-              {{ option.label }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="row mt-2">       
+                <div class="form-group col-lg-1">
+                    <label for="">Sex</label>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="profile.gendar">
+                        <option *ngFor="let option of gender" [value]="option.value">
+                            {{ option.label }}
+                        </option>
+                    </select>
+                </div>
 
-        <div class="form-group col-lg-2">
-          <label for="dob">DOB</label>
-          <input
-            id="dob"
-            type="date"
-            class="form-control"
-            name="dob"
-            [(ngModel)]="profile.dob"
-            (ngModelChange)="setAge(profile.dob)"
-          />
-        </div>
+                <div class="form-group col-lg-2">
+                    <label for="father_detail">Father Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="profile.father_detail" id="father_detail"
+                        name="father_detail" />
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="mother_detail">Mother Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="profile.mother_detail" id="mother_detail"
+                        name="mother_detail" />
+                </div>
 
-        <div class="form-group col-lg-2">
-          <label for="gothram">Gothram</label>
-          <input
-            id="gothram"
-            type="text"
-            class="form-control"
-            name="gothram"
-            [(ngModel)]="profile.gothram"
-          />
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="star">Star</label>
-          <input
-            id="star"
-            type="text"
-            class="form-control"
-            name="star"
-            [(ngModel)]="profile.star"
-          />
-        </div>
+                <div class="form-group col-lg-2">
+                    <label for="birth_time">Place of Birth</label>
+                    <input id="birth_place" type="text" class="form-control" name="birth_place"
+                        [(ngModel)]="profile.birth_place" />
+                </div>
 
-        <div class="form-group col-lg-2">
-          <label for="star_paadam">Star Padam</label>
-          <input
-            id="star_paadam"
-            type="text"
-            class="form-control"
-            name="star_paadam"
-            [(ngModel)]="profile.star_paadam"
-          />
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="rasi">Rasi</label>
-          <input
-            id="rasi"
-            type="text"
-            class="form-control"
-            name="rasi"
-            [(ngModel)]="profile.rasi"
-          />
-        </div>
-      </div>
-      <div class="row mt-3">
-        
-        <div class="form-group col-lg-2">
-          <label for="birth_time">Birth Time</label>
-          <input
-            id="birth_time"
-            type="time"
-            class="form-control"
-            name="birth_time"
-            [(ngModel)]="profile.birth_time"
-          />
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="birth_time">Birth Place</label>
-          <input
-            id="birth_place"
-            type="text"
-            class="form-control"
-            name="birth_place"
-            [(ngModel)]="profile.birth_place"
-          />
-        </div>
-
-        <div class="form-group col-lg-2">
-          <label for="education">Education</label>
-          <input
-            id="education"
-            type="text"
-            class="form-control"
-            name="education"
-            [(ngModel)]="profile.education"
-          />
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="occupation">Occupation</label>
-          <input
-            id="occupation"
-            type="text"
-            class="form-control"
-            name="occupation"
-            [(ngModel)]="profile.occupation"
-          />
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="location">Location</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="profile.job_location"
-            id="location"
-            name="location"
-          />
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="annual_income">Income (per Annum)</label>
-          <div class="input-group">
-            <div class="input-group-append">
-              <span class="input-group-text">Rs.</span>
+                <div class="form-group col-lg-2">
+                    <label for="birth_time">Birth Time</label>
+                    <input id="birth_time" type="time" class="form-control" name="birth_time"
+                        [(ngModel)]="profile.birth_time" />
+                </div>
             </div>
 
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="profile.annual_income"
-              id="annual_income"
-              name="annual_income"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="row mt-3">
+            <div class="row mt-2">
+                <hr class="mt-10">
+                <h3>Professional Details</h3>
+                <div class="form-group col-lg-2">
+                    <label for="education">Education Qualification</label>
+                    <input id="education" type="text" class="form-control" name="education"
+                        [(ngModel)]="profile.education" />
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="occupation">Current Employer</label>
+                    <input id="occupation" type="text" class="form-control" name="occupation"
+                        [(ngModel)]="profile.occupation" />
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="location">Job Location</label>
+                    <input type="text" class="form-control" [(ngModel)]="profile.job_location" id="location"
+                        name="location" />
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="location">Job Country</label>
+                    <input type="text" class="form-control" [(ngModel)]="profile.job_location" id="location"
+                        name="location" />
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="annual_income">Annual Income</label>
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <span class="input-group-text">Rs.</span>
+                        </div>
 
-        <div class="form-group col-lg-1">
-          <label for="height">Height (ft)</label>
-          <input
-            type="number"
-            class="form-control"
-            [(ngModel)]="profile.height"
-            min="0.0"
-            max="15.0"
-            step="0.1"
-            id="height"
-            name="height"
-          />
+                        <input type="number" class="form-control" [(ngModel)]="profile.annual_income"
+                            id="annual_income" name="annual_income" />
+                    </div>
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="profile_type">Citizen Ship</label>
+                    <select class="form-select" aria-label="Default select example"
+                        [(ngModel)]="profile.profile_type">
+                        <option *ngFor="let option of type" [value]="option.value">
+                            {{ option.label }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+                <!-- <div class="form-group col-lg-2">
+                    <label for="profile_type">Type</label>
+                    <select
+                        class="form-select"
+                        aria-label="Default select example"
+                        [(ngModel)]="profile.profile_type"
+                    >
+                        <option *ngFor="let option of type" [value]="option.value">
+                        {{ option.label }}
+                        </option>
+                    </select>
+                </div> -->
+            <div class="row mt-2">
+                <hr class="mt-10">
+                <h3>Community Details</h3>
+                <div class="form-group col-lg-2">
+                    <label for="gothram">Gothram</label>
+                    <input id="gothram" type="text" class="form-control" name="gothram" [(ngModel)]="profile.gothram" />
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="caste_sect">Sect</label>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="profile.caste_sect">
+                        <option *ngFor="let option of caste" [value]="option.value">
+                            {{ option.label }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-2">
+                    <label for="subsect">Sub Sect</label>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="profile.subsect">
+                        <option *ngFor="let option of subcaste" [value]="option.value">
+                            {{ option.label }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="rasi">Rasi</label>
+                    <input id="rasi" type="text" class="form-control" name="rasi" [(ngModel)]="profile.rasi" />
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="star">Star</label>
+                    <input id="star" type="text" class="form-control" name="star" [(ngModel)]="profile.star" />
+                </div>
+
+                <div class="form-group col-lg-2">
+                    <label for="star_paadam">Star Padam</label>
+                    <input id="star_paadam" type="text" class="form-control" name="star_paadam"
+                        [(ngModel)]="profile.star_paadam" />
+                </div>
+            </div>
+
         </div>
 
-        <div class="form-group col-lg-1">
-          <label for="weight">Weight (kg)</label>
-          <input
-            type="number"
-            class="form-control"
-            [(ngModel)]="profile.weight"
-            id="weight"
-            min="0.0"
-            max="150.0"
-            step="1.5"
-            name="weight"
-          />
+        <div class="row mt-3">
+            <hr class="mt-10">
+            <h3>Health Details</h3>
+            <div class="form-group col-lg-1">
+                <label for="height">Height (ft)</label>
+                <input type="number" class="form-control" [(ngModel)]="profile.height" min="0.0" max="15.0" step="0.1"
+                    id="height" name="height" />
+            </div>
+
+            <div class="form-group col-lg-1">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" class="form-control" [(ngModel)]="profile.weight" id="weight" min="0.0" max="150.0"
+                    step="1.5" name="weight" />
+            </div>
         </div>
-        <div class="form-group col-lg-2">
-          <label for="father_detail">Father Name</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="profile.father_detail"
-            id="father_detail"
-            name="father_detail"
-          />
+
+        <div class="row mt-3">
+            <hr class="mt-10">
+            <h3>Family Details</h3>
+            <div class="form-group col-lg-6">
+                <label for="father_detail">Father Detail</label>
+                <textarea class="form-control" rows="4" [(ngModel)]="profile.father_detail" id="father_detail"
+                    name="father_detail"></textarea>
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="mother_detail">Mother Detail</label>
+                <textarea class="form-control" rows="4" [(ngModel)]="profile.mother_detail" id="mother_detail"
+                    name="mother_detail"></textarea>
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="sibling_detail">Sibling Detail</label>
+                <textarea class="form-control" rows="4" [(ngModel)]="profile.sibling_detail" id="sibling_detail"
+                    name="sibling_detail"></textarea>
+            </div>
+
+            <div class="form-group col-lg-6">
+                <label for="other_info">Any Other Information to Share</label>
+                <textarea class="form-control" rows="4" [(ngModel)]="profile.other_info"></textarea>
+            </div>
         </div>
-        <div class="form-group col-lg-2">
-          <label for="mother_detail">Mother Name</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="profile.mother_detail"
-            id="mother_detail"
-            name="mother_detail"
-          />
+
+        <div class="row mt-3">
+            <hr class="mt-10">
+            <h3>Preference Details</h3>
+            <div class="form-group col-lg-3 txt-center">
+                <label for="age_range">Age Range</label>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>from</label>
+                        <input type="text" class="form-control" [(ngModel)]="profile.age_pref_from" id="age_pref_from" name="age_pref_from" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>to</label>
+                        <input type="text" class="form-control" [(ngModel)]="profile.age_pref_to" id="age_pref_to" name="age_pref_to" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 txt-center">
+                <label for="income_range">Income Range</label>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>from</label>
+                        <input type="text" class="form-control" [(ngModel)]="profile.age_income_from" id="age_income_from" name="age_income_from" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>to</label>
+                        <input type="text" class="form-control" [(ngModel)]="profile.age_income_to" id="age_income_to" name="age_income_to" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 txt-center">
+                <label for="height_range">Height Range</label>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>from</label>
+                        <input type="text" class="form-control" [(ngModel)]="profile.age_height_from" id="age_height_from" name="age_height_from" />
+                    </div>
+                    <div class="col-lg-6">
+                        <label>to</label>
+                        <input type="text" class="form-control" [(ngModel)]="profile.age_height_to" id="age_height_to" name="age_height_to" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-3">
+                <label for="other_expectation">Any Other Expectation</label>
+                <textarea class="form-control" [(ngModel)]="profile.other_expectation"></textarea>
+            </div>
         </div>
-        <div class="form-group col-lg-2">
-          <label for="sibling_detail">Sibling Detail</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="profile.sibling_detail"
-            id="sibling_detail"
-            name="sibling_detail"
-          />
+
+        
+
+        <div class="row mt-3">
+            <hr class="mt-10">
+            <h3>Contact Information</h3>
+            <div class="form-group col-lg-3">
+                <label for="primary_number">Primary Number</label>
+                <input type="text" class="form-control" [(ngModel)]="profile.primary_number" id="primary_number" name="primary_number" />
+            </div>
+            <div class="form-group col-lg-3">
+                <label for="secondary_number">Secondary Number</label>
+                <input type="text" class="form-control" [(ngModel)]="profile.secondary_number" id="secondary_number" name="secondary_number" />
+            </div>
+            <div class="form-group col-lg-3">
+                <label for="email_id">Email</label>
+                <input type="text" class="form-control" [(ngModel)]="profile.email_id" id="email_id" name="email_id" />
+            </div>
+            <div class="form-group col-lg-3">
+                <label for="self_declaration">Self-Declaration</label>
+                <textarea class="form-control" [(ngModel)]="profile.self_declaration"></textarea>
+            </div>
         </div>
-        <div class="form-group col-lg-2">
+
+        <div class="row mt-3">
+            <hr class="mt-10">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" [value]="profile.agree_inform_marriage"
+                    id="agree_inform_marriage" [checked]="profile.agree_inform_marriage === 'Y'" />
+                <label class="form-check-label" for="agree_inform_marriage">
+                    Agree to inform admin once marriage settled
+                </label>
+            </div>
+            <div class="row mt-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [value]="profile.agree_inform_exit" id="agree_inform_exit"
+                        [checked]="profile.agree_inform_exit === 'Y'" />
+                    <label class="form-check-label" for="agree_inform_exit">
+                        Agree to inform while leaving
+                    </label>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [value]="profile.self_declaration" id="self_declaration"
+                        [checked]="profile.self_declaration === 'Y'" />
+                    <label class="form-check-label" for="self_declaration">
+                        declare that above mentioned details are true
+                    </label>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="text-center">
+                    <button class="btn btn-primary" (click)="save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="form-group col-lg-2">
           <label for="contact_relation">Contact Relation</label>
           <input
             type="text"
@@ -278,21 +322,12 @@
             id="primary_contact"
             name="primary_contact"
           />
-        </div>
-      </div>
-      <div class="row mt-3">
+        </div> 
+</div> -->
+<!-- <div class="row mt-3">
        
         
-        <div class="form-group col-lg-2">
-          <label for="email_id">Email</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="profile.email_id"
-            id="email_id"
-            name="email_id"
-          />
-        </div>
+
         <div class="form-group col-lg-4">
           <label for="brief_detail">Brief Detail</label>
           <textarea
@@ -307,11 +342,9 @@
             [(ngModel)]="profile.other_info"
           ></textarea>
         </div>
-      </div>
-      <div class="row mt-3">
-        
-      </div>
-      <div class="row mt-3">
+      </div> -->
+
+<!-- <div class="row mt-3">
         <h4>Expectations:</h4>
         <div class="form-group col-lg-2">
           <label for="height_pref_from">Height(ft) From</label>
@@ -360,54 +393,5 @@
             name="age_pref_to"
           />
         </div>
-      </div>
-      <div class="row mt-3">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            [value]="profile.agree_inform_marriage"
-            id="agree_inform_marriage"
-            [checked]="profile.agree_inform_marriage === 'Y'"
-          />
-          <label class="form-check-label" for="agree_inform_marriage">
-            Agree to inform admin once marriage settled
-          </label>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            [value]="profile.agree_inform_exit"
-            id="agree_inform_exit"
-            [checked]="profile.agree_inform_exit === 'Y'"
-          />
-          <label class="form-check-label" for="agree_inform_exit">
-            Agree to inform while leaving
-          </label>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            [value]="profile.self_declaration"
-            id="self_declaration"
-            [checked]="profile.self_declaration === 'Y'"
-          />
-          <label class="form-check-label" for="self_declaration">
-            declare that above mentioned details are true
-          </label>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="text-center">
-          <button class="btn btn-primary" (click)="save()">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+      </div> 
+    </div> -->
