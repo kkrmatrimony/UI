@@ -1,19 +1,25 @@
 <div class="container mt-5">
-    <h3>Profile</h3>
+    <h3>Personal Details</h3>
     <div class="row">
         <div class="profile-form">
             <div class="row">
-                <!-- <div class="form-group col-lg-2">
-                    <label for="profile_source">Source</label>
-                    <input
-                        id="profile_source"
-                        type="text"
-                        class="form-control"
-                        name="profile_source"
-                        [(ngModel)]="profile.profile_source"
-                    />
-                </div> -->
-                <div class="form-group col-lg-3">
+                <div class="form-group col-lg-2">
+                    <label for="profile_for">Profile For</label>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="profile.profile_for">
+                        <option *ngFor="let option of profileFor" [value]="option.value">
+                            {{ option.label }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="marriage_status">Marriage Status</label>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="profile.marriage_status">
+                        <option *ngFor="let option of marriageStatus" [value]="option.value">
+                            {{ option.label }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-lg-2">
                     <label for="address">Name</label>
                     <input type="text" class="form-control" [(ngModel)]="profile.profile_name" id="address" required />
                 </div>
@@ -42,6 +48,11 @@
                     <label for="mother_detail">Mother Name</label>
                     <input type="text" class="form-control" [(ngModel)]="profile.mother_detail" id="mother_detail"
                         name="mother_detail" />
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="mother_tongue">Mother Tongue</label>
+                    <input type="text" class="form-control" [(ngModel)]="profile.mother_tongue" id="mother_tongue"
+                        name="mother_tongue" />
                 </div>
 
                 <div class="form-group col-lg-2">
@@ -80,12 +91,21 @@
                     <input type="text" class="form-control" [(ngModel)]="profile.job_location" id="location"
                         name="location" />
                 </div>
+                <div class="form-group col-md-1 currency-input">
+                    <label for="currency">Currency</label>
+                    <select class="form-select" id="currency" [(ngModel)]="selectedCurrency">
+                      <option *ngFor="let currency of currencies" [value]="currency.code">
+                        {{ currency.symbol }}
+                      </option>
+                    </select>
+                  </div>
+                  
                 <div class="form-group col-lg-2">
                     <label for="annual_income">Annual Income</label>
                     <div class="input-group">
-                        <div class="input-group-append">
+                        <!-- <div class="input-group-append">
                             <span class="input-group-text">Rs.</span>
-                        </div>
+                        </div> -->
 
                         <input type="number" class="form-control" [(ngModel)]="profile.annual_income"
                             id="annual_income" name="annual_income" />
@@ -205,24 +225,11 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <label>from</label>
-                        <input type="text" class="form-control" [(ngModel)]="profile.age_pref_from" id="age_pref_from" name="age_pref_from" />
+                        <input type="number" class="form-control" [(ngModel)]="profile.age_pref_from" id="age_pref_from" name="age_pref_from" />
                     </div>
                     <div class="col-lg-6">
                         <label>to</label>
-                        <input type="text" class="form-control" [(ngModel)]="profile.age_pref_to" id="age_pref_to" name="age_pref_to" />
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-lg-3 txt-center">
-                <label for="income_range">Income Range</label>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <label>from</label>
-                        <input type="text" class="form-control" [(ngModel)]="profile.age_income_from" id="age_income_from" name="age_income_from" />
-                    </div>
-                    <div class="col-lg-6">
-                        <label>to</label>
-                        <input type="text" class="form-control" [(ngModel)]="profile.age_income_to" id="age_income_to" name="age_income_to" />
+                        <input type="number" class="form-control" [(ngModel)]="profile.age_pref_to" id="age_pref_to" name="age_pref_to" />
                     </div>
                 </div>
             </div>
@@ -231,13 +238,17 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <label>from</label>
-                        <input type="text" class="form-control" [(ngModel)]="profile.age_height_from" id="age_height_from" name="age_height_from" />
+                        <input type="number" class="form-control" [(ngModel)]="profile.height_pref_from" id="height_pref_from" name="height_pref_from" />
                     </div>
                     <div class="col-lg-6">
                         <label>to</label>
-                        <input type="text" class="form-control" [(ngModel)]="profile.age_height_to" id="age_height_to" name="age_height_to" />
+                        <input type="number" class="form-control" [(ngModel)]="profile.height_pref_to" id="height_pref_to" name="height_pref_to" />
                     </div>
                 </div>
+            </div>
+            <div class="form-group col-lg-3 txt-center">
+                <label for="income_range">Income Range</label>
+                <input type="number" class="form-control mt-18" [(ngModel)]="profile.salary_preference" id="salary_preference" name="salary_preference" />
             </div>
             <div class="form-group col-lg-3">
                 <label for="other_expectation">Any Other Expectation</label>

@@ -50,6 +50,8 @@ export class ProfileCreateComponent implements OnInit {
     age_pref_to: 0,
     height_pref_from: '',
     height_pref_to: '',
+    marriage_status: '',
+    profile_for: '',
     created_by: JSON.parse(localStorage.getItem('user')!).OrgId,
     updated_by: JSON.parse(localStorage.getItem('user')!).OrgId,
   };
@@ -100,6 +102,38 @@ export class ProfileCreateComponent implements OnInit {
       label: 'VATHIMA',
     },
   ];
+  profileFor = [
+    {
+      value: 'Yes',
+      label: 'Yes',
+    },
+    {
+      value: 'No',
+      label: 'No',
+    },
+  ];
+  marriageStatus = [
+    {
+      value: 'MARRIED',
+      label: 'MARRIED',
+    },
+    {
+      value: 'UNMARRIED',
+      label: 'UNMARRIED',
+    },
+  ];
+
+  currencies = [
+    { code: 'USD', symbol: '$' },
+    { code: 'EUR', symbol: '€' },
+    { code: 'GBP', symbol: '£' },
+    { code: 'INR', symbol: '₹' },
+    { code: 'JPY', symbol: '¥' },
+    { code: 'AUD', symbol: 'A$' },
+    { code: 'CAD', symbol: 'C$' }
+  ];
+  
+  selectedCurrency: string = 'INR'; 
   constructor(
     private utility: UtilityService,
     private profileService: ProfileService,
