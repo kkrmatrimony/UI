@@ -31,6 +31,7 @@ export class ProfileCreateComponent implements OnInit {
     occupation: '',
     annual_income: 0,
     job_location: '',
+    job_country:'',
     height: '',
     weight: '',
     father_detail: '',
