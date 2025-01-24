@@ -8,7 +8,7 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit{
   
-  title = 'raattai_ui';
+  title = 'kkkr_ui';
   constructor(private as:AppService){
 
   }

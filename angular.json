@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "raattai_ui": {
+    "kkkr_ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/raattai_ui",
+            "outputPath": "dist/kkkr_ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "raattai_ui:build:production"
+              "browserTarget": "kkkr_ui:build:production"
             },
             "development": {
-              "browserTarget": "raattai_ui:build:development"
+              "browserTarget": "kkkr_ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "raattai_ui:build"
+            "browserTarget": "kkkr_ui:build"
           }
         },
         "test": {
