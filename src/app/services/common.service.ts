@@ -16,10 +16,26 @@ export class CommonService {
       headers: headers,
     });
   }
+
+  public getSubscriberIds(): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.localUrl + 'getSubscriberIds' , {
+      headers: headers,
+    });
+  }
 }
 
 export interface RefType {
   ref_code: string;
   ref_desc: string;
   ref_type: string;
+}
+
+export interface SubscriberModel {
+  subscriber_source?: string;
+  subscriber_id: string;
+  subcriber_name?: string;
+  subscriber_status?:string;
+  user_type?:string
 }

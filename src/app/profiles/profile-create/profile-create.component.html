@@ -66,6 +66,15 @@
                     <input id="birth_time" type="time" class="form-control" name="birth_time"
                         [(ngModel)]="profile.birth_time" />
                 </div>
+
+                <div class="form-group col-lg-2">
+                    <label for="">Subscriber</label>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="profile.subscriber_id">
+                        <option *ngFor="let option of subscriberIdList" [value]="option.subscriber_id">
+                            {{ option.subscriber_id }}
+                        </option>
+                    </select>
+                </div>
             </div>
 
             <div class="row mt-2">

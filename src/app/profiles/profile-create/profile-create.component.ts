@@ -60,7 +60,8 @@ export class ProfileCreateComponent implements OnInit {
     father_name: '',
     mother_name: '',
     mother_tongue:'',
-    citizenship:''
+    citizenship:'',
+    subscriber_id:''
   };
 
   gender = [
@@ -120,6 +121,8 @@ export class ProfileCreateComponent implements OnInit {
       label: 'UnMarried',
     },
   ];
+
+  subscriberIdList=[{"subscriber_id":""}];
 
   currencies = [
     { label: 'AED', symbol: '\u062f.\u0625;', value: 'UAE dirham' },
@@ -303,7 +306,11 @@ export class ProfileCreateComponent implements OnInit {
     });
     this.profile.created_by = JSON.parse(localStorage.getItem('user')|| '{}').OrgId;
     this.profile.updated_by = JSON.parse(localStorage.getItem('user')|| '{}').OrgId;
-    this.profile.profile_source = JSON.parse(localStorage.getItem('user')|| '{}').OrgId
+    this.profile.profile_source = JSON.parse(localStorage.getItem('user')|| '{}').OrgId;
+
+    this.commonService.getSubscriberIds().subscribe(response =>{
+      this.subscriberIdList = response.data;
+    })
   }
 
   
@@ -313,6 +320,8 @@ export class ProfileCreateComponent implements OnInit {
 
   save() {
     this.profile.profile_source = JSON.parse(localStorage.getItem('user')|| '{}').subscriber_source;
+    this.profile.created_by = JSON.parse(localStorage.getItem('user')|| '{}').subscriber_id;
+    this.profile.updated_by = JSON.parse(localStorage.getItem('user')|| '{}').subscriber_id;
     this.profileService.saveProfile(this.profile).subscribe((data) => {
       const dialogRef = this.dialog.open(InfoDialogComponent, {
         width: '500px',
