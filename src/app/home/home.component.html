@@ -1,5 +1,11 @@
-<div class="container" *ngIf="userDetails">
-    <h3><i>Welcome {{userDetails.OrgName}}</i></h3>   
+<div class="container" *ngIf="isAdmin">
+    <h3><i>Welcome Admin</i></h3>   
+    
+</div>
+
+
+<div class="container" *ngIf="!isAdmin">
+    <h3><i>Welcome Subscriber</i></h3>   
     
 </div>
 

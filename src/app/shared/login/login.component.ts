@@ -30,16 +30,29 @@ export class LoginComponent {
   onSubmit() {
     this.apiService.login(this.credentials).subscribe(
       (response) => {
-        this.auth.login(response); //store the user object under auth service
-        const dialogRef = this.dialog.open(InfoDialogComponent, {
-          width: '500px',
-          data: 'Login Successful',
-        });
-
-        dialogRef.afterClosed().subscribe((data) => {
-          this.as.setLogin(true);
-          this.router.navigate(['/home']);
-        });
+        if(response.message){
+          const dialogRef = this.dialog.open(InfoDialogComponent, {
+            width: '500px',
+            data: 'Login Failure',
+          });
+          dialogRef.afterClosed().subscribe((data) => {           
+            this.credentials.username = "";
+            this.credentials.password = "";
+          });
+        } else {
+          this.auth.login(response); //store the user object under auth service
+          const dialogRef = this.dialog.open(InfoDialogComponent, {
+            width: '500px',
+            data: 'Login Successful',
+          });
+  
+          dialogRef.afterClosed().subscribe((data) => {
+            this.as.setLogin(true);
+            this.router.navigate(['/home']);
+          });
+          
+        }
+        
       },
       (error) => {
         this.errorMessage = error.error.error;

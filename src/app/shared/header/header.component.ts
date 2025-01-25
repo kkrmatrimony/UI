@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   loggedIn = false;
   user: any;
   cartCount = 0;
+  isAdmin = false;
   constructor(
     private as: AppService,
     private loginService: LoginApiService,
@@ -24,7 +25,11 @@ export class HeaderComponent implements OnInit {
       this.loggedIn = data;
     });
   }
-  ngOnInit(): void {}
+  ngOnInit() {
+  this.isAdmin = JSON.parse(localStorage.getItem('user')|| '{}').user_type === 'A'?true:false;
+  console.log(this.isAdmin)  
+
+  }
 
   logout() {
     // this.loginService.logout().subscribe({

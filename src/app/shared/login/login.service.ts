@@ -5,19 +5,23 @@ import { login } from './login';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginApiService {
-
-  constructor(private http: HttpClient) { }
-
-  login(credentials: login): Observable<any> {
-    return this.http.get<any>(environment.localUrl+'login');
-  }
-  logout(){
+  constructor(private http: HttpClient) {}
+  
+  logout() {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get<any>(environment.apiUrl+'user/logout',{
+    return this.http.get<any>(environment.apiUrl + 'user/logout', {
+      headers: headers,
+    });
+  }
+
+  login(credentials: login): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(environment.localUrl + 'login', credentials, {
       headers: headers,
     });
   }

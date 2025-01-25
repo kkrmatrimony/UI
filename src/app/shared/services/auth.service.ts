@@ -14,6 +14,11 @@ export class AuthService {
   isAuthenticatedUser(): boolean {
     return !!localStorage.getItem('user') || this.isAuthenticated;
   }
+
+  isAdmin(): boolean {
+    return JSON.parse(localStorage.getItem('user')|| '{}').user_type === 'A';
+  }
+
   login(userRes:any){
     localStorage.setItem('user', JSON.stringify(userRes));
     this.isAuthenticated = true;

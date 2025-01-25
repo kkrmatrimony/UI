@@ -54,8 +54,8 @@ export class ProfileCreateComponent implements OnInit {
     height_pref_to: '',
     marriage_status: '',
     profile_for: '',
-    created_by: JSON.parse(localStorage.getItem('user')|| '{}').OrgId,
-    updated_by: JSON.parse(localStorage.getItem('user')|| '{}').OrgId,
+    created_by: JSON.parse(localStorage.getItem('user')|| '{}').subscriber_id,
+    updated_by: JSON.parse(localStorage.getItem('user')|| '{}').subscriber_id,
     salary_currency: '',
     father_name: '',
     mother_name: '',
@@ -312,6 +312,7 @@ export class ProfileCreateComponent implements OnInit {
   }
 
   save() {
+    this.profile.profile_source = JSON.parse(localStorage.getItem('user')|| '{}').subscriber_source;
     this.profileService.saveProfile(this.profile).subscribe((data) => {
       const dialogRef = this.dialog.open(InfoDialogComponent, {
         width: '500px',
