@@ -122,7 +122,7 @@ export class ProfileCreateComponent implements OnInit {
     },
   ];
 
-  subscriberIdList=[{"subscriber_id":""}];
+  subscriberIdList=[{"subscriber_id":""},{"subscriber_name":""}];
 
   currencies = [
     { label: 'AED', symbol: '\u062f.\u0625;', value: 'UAE dirham' },
