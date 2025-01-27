@@ -30,7 +30,7 @@ export class profileTableComponent implements OnInit {
     // });
   }
 
-  displayedColumns: string[] = ['profile_name', 'age', 'action'];
+  displayedColumns: string[] = ['profile_name', 'gender','dob','marriage_status', 'citizenship','subscription_end_date', 'primary_contact', 'action'];
 
 
   applyFilter(filterValue: string) {

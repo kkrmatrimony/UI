@@ -19,14 +19,40 @@
       id="appoinment-table"
     >
       <ng-container matColumnDef="profile_name">
-        <th mat-header-cell *matHeaderCellDef>Patient Id</th>
+        <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let element">{{ element.profile_name }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="age">
-        <th mat-header-cell *matHeaderCellDef>Age</th>
-        <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef>Gender</th>
+        <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
       </ng-container>
+
+      <ng-container matColumnDef="dob">
+        <th mat-header-cell *matHeaderCellDef>DOB</th>
+        <td mat-cell *matCellDef="let element">{{ element.dob }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="marriage_status">
+        <th mat-header-cell *matHeaderCellDef>Marriage Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.marriage_status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="citizenship">
+        <th mat-header-cell *matHeaderCellDef>Citizenship</th>
+        <td mat-cell *matCellDef="let element">{{ element.citizenship }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="subscription_end_date">
+        <th mat-header-cell *matHeaderCellDef>Valid Upto</th>
+        <td mat-cell *matCellDef="let element">{{ element.subscription_end_date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="primary_contact">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let element">{{ element.primary_contact }}</td>
+      </ng-container>
+
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { ProfileService } from '../profile.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { GetProfile } from 'src/app/shared/enums/getProfile';
 
 @Component({
   selector: 'app-profiles-home',
@@ -14,7 +15,7 @@ export class ProfilesHomeComponent implements OnInit {
   constructor(private router: Router, private profileService: ProfileService, private authService: AuthService) {}
   ngOnInit(): void {   
     this.isAdmin = this.authService.isAdmin(); 
-    this.profileService.getProfiles().subscribe((res) => {
+    this.profileService.getProfiles(GetProfile.ALL).subscribe((res) => {
       this.profiles = res;
     });
   }

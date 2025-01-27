@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilityService } from 'src/app/services/utility.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 import { ProfileService } from '../profile.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from 'src/app/shared/info-dialog/info-dialog.component';
 import { Router } from '@angular/router';
-import { CommonService, RefType } from 'src/app/services/common.service';
+import { CommonService, RefType } from 'src/app/shared/services/common.service';
 
 @Component({
   selector: 'app-profile-create',
