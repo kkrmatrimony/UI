@@ -21,7 +21,9 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isAdmin = this.authService.isAdmin();
+     this.authService.isAdmin$.subscribe(isAdmin =>{
+      this.isAdmin =isAdmin;
+    });
     this.userDetails = JSON.parse(localStorage.getItem('user')!);    
     if (this.userDetails) {
     }

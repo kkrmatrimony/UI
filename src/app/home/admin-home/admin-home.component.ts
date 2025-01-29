@@ -10,18 +10,18 @@ import { GetProfile } from 'src/app/shared/enums/getProfile';
 })
 export class AdminHomeComponent implements OnInit {
   
-  last10dayscreatedprofiles=[];
-  last7daysexpiringprofiles=[];
+  last10daysexpiringprofiles=[];
+  last7dayscreatedprofiles=[];
   constructor(private profileService:ProfileService){
 
   }
 
   ngOnInit(): void {
     this.profileService.getProfiles(GetProfile.LAST10DAYSUBS).subscribe((res) => {
-      this.last10dayscreatedprofiles = res;
+      this.last10daysexpiringprofiles = res;
     });
     this.profileService.getProfiles(GetProfile.LAST7DAYSCREATION).subscribe((res) => {
-      this.last7daysexpiringprofiles = res;
+      this.last7dayscreatedprofiles = res;
     });
   }
 
