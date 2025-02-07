@@ -9,9 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { profileTableComponent } from './components/profile-table/profile-table.component';
+import { SubscriberHomeTableComponent } from './components/subscriber-home-table/subscriber-home-table.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     InfoDialogComponent,
     ForgotPasswordComponent,
-    profileTableComponent
+    profileTableComponent,
+    SubscriberHomeTableComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +32,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MaterialModule,
   ],
-  providers:[],
-  exports: [HeaderComponent, FooterComponent, InfoDialogComponent,profileTableComponent],
+  providers: [],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    InfoDialogComponent,
+    profileTableComponent,
+    SubscriberHomeTableComponent,
+  ],
 })
 export class SharedModule {}

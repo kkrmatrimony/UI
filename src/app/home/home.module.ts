@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { SubscriberHomeComponent } from './subscriber-home/subscriber-home.component';
 import { ServicesComponent } from './services/services.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeService } from './home.service';
@@ -10,7 +11,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 
 @NgModule({
-  declarations: [HomeComponent, AdminHomeComponent, ServicesComponent],
+  declarations: [
+    HomeComponent,
+    AdminHomeComponent,
+    ServicesComponent,
+    SubscriberHomeComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,

@@ -1,14 +1,21 @@
-<div class="container" *ngIf="isAdmin">
+<div class="container" *ngIf="isAdmin && loggedIn">
     <h3><i>Welcome Admin</i></h3>  
     <app-admin-home></app-admin-home> 
     
 </div>
 
 
-<div class="container" *ngIf="!isAdmin">
+<div class="container" *ngIf="!isAdmin && loggedIn">
     <h3><i>Welcome Subscriber</i></h3>   
-    
+    <app-subscriber-home></app-subscriber-home> 
 </div>
 
+
+<div class="container" *ngIf="!loggedIn">
+          
+   <!-- <img src="../../assets/img/nadaswaram1.png"/> -->
+    Public home page - TO be designed with adds, promos
+
+</div>
 
 

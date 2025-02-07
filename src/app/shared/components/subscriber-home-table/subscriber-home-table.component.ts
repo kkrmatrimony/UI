@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-profile-table',
-  templateUrl: './profile-table.component.html',
-  styleUrls: ['./profile-table.component.scss']
+  selector: 'app-subscriber-home-table',
+  templateUrl: './subscriber-home-table.component.html',
+  styleUrls: ['./subscriber-home-table.component.scss']
 })
-export class profileTableComponent implements OnInit {
+export class SubscriberHomeTableComponent implements OnInit {
   @Input()
   set profileTableData(value: any) {
     console.log(value);
@@ -22,13 +22,9 @@ export class profileTableComponent implements OnInit {
   ngOnInit(): void {
    
   }
+  
 
-
-  retrieveAppointments(data: any) {
-    
-  }
-
-  displayedColumns: string[] = ['profile_name', 'gender','dob','marriage_status', 'citizenship','subscription_end_date', 'primary_contact', 'action'];
+  displayedColumns: string[] = ['profile_name', 'gendar','dob','marriage_status', 'citizenship','subscription_end_date', 'primary_contact', 'action'];
 
 
   applyFilter(filterValue: string) {
@@ -45,7 +41,7 @@ export class profileTableComponent implements OnInit {
     //this.router.navigate(['/pet-consultation-home'], { state: apt });
   }
   gotoProfile(profile:any){
-    this.router.navigate(['/profiles/create-profile'],{ state: profile });
+    //this.router.navigate(['/profiles/create-profile'],{ state: profile });
   }
 
 }

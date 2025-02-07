@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  private isAuthenticated = false;  
+  private isAuthenticated = false;
   private isAdminSubject = new BehaviorSubject(false);
   public isAdmin$ = this.isAdminSubject.asObservable();
   public isAdmin = false;
 
-  constructor() { 
-    
-  } 
+  constructor(private appService: AppService) {}
 
   isAuthenticatedUser(): boolean {
     return !!localStorage.getItem('user') || this.isAuthenticated;
   }
-  
 
-  login(userRes:any){
+  login(userRes: any) {
     localStorage.setItem('user', JSON.stringify(userRes));
     this.isAuthenticated = true;
-    console.log(JSON.parse(localStorage.getItem('user')|| '{}').user_type === 'A');
-    if(JSON.parse(localStorage.getItem('user')|| '{}').user_type === 'A'){
-    this.isAdminSubject.next(true)
-    }else {
+    console.log(
+      JSON.parse(localStorage.getItem('user') || '{}').user_type === 'A'
+    );
+    this.appService.setLogin(true);
+    if (JSON.parse(localStorage.getItem('user') || '{}').user_type === 'A') {
+      this.isAdminSubject.next(true);
+    } else {
       this.isAdminSubject.next(false);
     }
   }
@@ -35,6 +35,6 @@ export class AuthService {
     localStorage.removeItem('user');
     this.isAuthenticated = false;
     this.isAdminSubject.next(false);
-    
+    this.appService.setLogin(false);
   }
 }

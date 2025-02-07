@@ -14,7 +14,9 @@ export class ProfilesHomeComponent implements OnInit {
   isAdmin = false;
   constructor(private router: Router, private profileService: ProfileService, private authService: AuthService) {}
   ngOnInit(): void {   
-    this.isAdmin = this.authService.isAdmin; 
+    this.authService.isAdmin$.subscribe(isAdmin=>{
+      this.isAdmin = isAdmin;
+    }); 
     this.profileService.getProfiles(GetProfile.ALL).subscribe((res) => {
       this.profiles = res;
     });

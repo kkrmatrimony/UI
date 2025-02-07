@@ -12,13 +12,18 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class HomeComponent implements OnInit {
   userDetails: any;
+  loggedIn= false;
   isAdmin = false;
   constructor(
     private as: AppService,
     private homeServive: HomeService,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    this.as.loginObs.subscribe(data=>{
+      this.loggedIn = data;
+    })
+  }
 
   ngOnInit(): void {
      this.authService.isAdmin$.subscribe(isAdmin =>{

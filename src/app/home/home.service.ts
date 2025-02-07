@@ -5,18 +5,35 @@ import { environment } from 'src/environments/environment';
 // import { Config } from '../config/app.config';
 
 @Injectable({
-    providedIn: 'root'
-  })
-
+  providedIn: 'root',
+})
 export class HomeService {
+  constructor(public http: HttpClient) {}
 
-    constructor(public http: HttpClient) {}
+  public getProfiles(): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.localUrl + 'getprofiles', {
+      headers: headers,
+    });
+  }
 
-    
-    public getProfiles(): Observable<any> {
-      let headers = new HttpHeaders();
-      headers.append('Content-Type', 'application/json');
-      return this.http.get(environment.localUrl + 'getprofiles',
-        { headers: headers})
-    }   
+  public profilesBySubscriberId(): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      environment.localUrl + 'getprofilesBySubscriberId',
+      {
+        subscriber_id: 'KKKR00002',
+      },
+      { headers: headers }
+    );
+  }
+
+  // public profilesBySubscriberId(): Observable<any> {
+  //   let headers = new HttpHeaders();
+  //   headers.append('Content-Type', 'application/json');
+  //   return this.http.get(environment.localUrl + 'getprofilesBySubscriberId',
+  //     { headers: headers})
+  // }
 }
