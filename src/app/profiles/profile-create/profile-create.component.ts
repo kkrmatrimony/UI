@@ -31,7 +31,7 @@ export class ProfileCreateComponent implements OnInit {
     occupation: '',
     annual_income: 0,
     job_location: '',
-    job_country:'',
+    job_country: '',
     height: '',
     weight: '',
     father_detail: '',
@@ -44,9 +44,9 @@ export class ProfileCreateComponent implements OnInit {
     brief_detail: '',
     expectation: '',
     other_info: ' ',
-    agree_inform_marriage: "Y",
-    agree_inform_exit: "Y",
-    self_declaration: "Y",
+    agree_inform_marriage: 'Y',
+    agree_inform_exit: 'Y',
+    self_declaration: 'Y',
     star: '',
     age_pref_from: 0,
     age_pref_to: 0,
@@ -54,14 +54,15 @@ export class ProfileCreateComponent implements OnInit {
     height_pref_to: '',
     marriage_status: '',
     profile_for: '',
-    created_by: JSON.parse(localStorage.getItem('user')|| '{}').subscriber_id,
-    updated_by: JSON.parse(localStorage.getItem('user')|| '{}').subscriber_id,
+    created_by: JSON.parse(localStorage.getItem('user') || '{}').subscriber_id,
+    updated_by: JSON.parse(localStorage.getItem('user') || '{}').subscriber_id,
     salary_currency: '',
     father_name: '',
     mother_name: '',
-    mother_tongue:'',
-    citizenship:'',
-    subscriber_id:''
+    mother_tongue: '',
+    citizenship: '',
+    subscriber_id: '',
+    subscription_end_date: new Date(),
   };
 
   gender = [
@@ -111,6 +112,13 @@ export class ProfileCreateComponent implements OnInit {
     },
   ];
   profileFor = [] as RefType[];
+  gothramList = [] as RefType[];
+  sectList = [] as RefType[];
+  subsectList = [] as RefType[];
+  rasiList = [] as RefType[];
+  starList = [] as RefType[];
+  starPadamList = ['', 1, 2, 3, 4];
+
   marriageStatus = [
     {
       value: 'Re-Marriage',
@@ -122,7 +130,11 @@ export class ProfileCreateComponent implements OnInit {
     },
   ];
 
-  subscriberIdList=[{"subscriber_id":""},{"subscriber_name":""}];
+  subscriberIdList = [
+    { subscriber_id: '' },
+    { subscriber_name: '' },
+    { subscription_upto: new Date() },
+  ];
 
   currencies = [
     { label: 'AED', symbol: '\u062f.\u0625;', value: 'UAE dirham' },
@@ -299,29 +311,73 @@ export class ProfileCreateComponent implements OnInit {
     if (history.state) {
       this.profile = history.state;
       this.profile.dob = this.utility.convertTodayTostr(this.profile.dob);
-      this.profile.age = this.utility.getAge(this.profile.dob);     
+      this.profile.age = this.utility.getAge(this.profile.dob);
     }
     this.commonService.getReferenceData('Pfor').subscribe((pfor) => {
       this.profileFor = pfor;
     });
-    this.profile.created_by = JSON.parse(localStorage.getItem('user')|| '{}').OrgId;
-    this.profile.updated_by = JSON.parse(localStorage.getItem('user')|| '{}').OrgId;
-    this.profile.profile_source = JSON.parse(localStorage.getItem('user')|| '{}').OrgId;
+    this.commonService.getReferenceData('Gothram').subscribe((gothramList) => {
+      this.gothramList = gothramList;
+    });
+    this.commonService.getReferenceData('Sect').subscribe((sect) => {
+      this.sectList = sect;
+    });
+    this.commonService.getReferenceData('Rasi').subscribe((rasi) => {
+      this.rasiList = rasi;
+    });
+    this.commonService.getReferenceData('Star').subscribe((star) => {
+      this.starList = star;
+    });
+    this.profile.created_by = JSON.parse(
+      localStorage.getItem('user') || '{}'
+    ).OrgId;
+    this.profile.updated_by = JSON.parse(
+      localStorage.getItem('user') || '{}'
+    ).OrgId;
+    this.profile.profile_source = JSON.parse(
+      localStorage.getItem('user') || '{}'
+    ).OrgId;
+    this.profile.agree_inform_exit = 'Y';
+    this.profile.agree_inform_marriage = 'Y';
+    this.profile.self_declaration = 'Y';
 
-    this.commonService.getSubscriberIds().subscribe(response =>{
+    this.commonService.getSubscriberIds().subscribe((response) => {
       this.subscriberIdList = response.data;
-    })
+      if (!this.profile.subscriber_id) {
+        this.profile.subscriber_id = this.subscriberIdList[0].subscriber_id;
+        this.profile.subscription_end_date =
+          this.subscriberIdList[0].subscription_upto;
+      }
+    });
   }
 
-  
   setAge(dob: string) {
-    this.profile.age = this.utility.getAge(dob);    
+    this.profile.age = this.utility.getAge(dob);
+  }
+
+  setSubscriberDetails(subscriber: any) {
+    const sub = this.subscriberIdList.find(
+      (item) => item.subscriber_id === subscriber
+    );
+    this.profile.subscription_end_date = sub?.subscription_upto;
+  }
+
+  changeSect(sect: string) {
+    this.commonService.getReferenceData(sect).subscribe((subsect) => {
+      this.subsectList = subsect;
+    });
   }
 
   save() {
-    this.profile.profile_source = JSON.parse(localStorage.getItem('user')|| '{}').subscriber_source;
-    this.profile.created_by = JSON.parse(localStorage.getItem('user')|| '{}').subscriber_id;
-    this.profile.updated_by = JSON.parse(localStorage.getItem('user')|| '{}').subscriber_id;
+    this.profile.profile_source = JSON.parse(
+      localStorage.getItem('user') || '{}'
+    ).subscriber_source;
+    this.profile.created_by = JSON.parse(
+      localStorage.getItem('user') || '{}'
+    ).subscriber_id;
+    this.profile.updated_by = JSON.parse(
+      localStorage.getItem('user') || '{}'
+    ).subscriber_id;
     this.profileService.saveProfile(this.profile).subscribe((data) => {
       const dialogRef = this.dialog.open(InfoDialogComponent, {
         width: '500px',
