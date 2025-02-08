@@ -10,6 +10,9 @@ export class AuthService {
   private isAdminSubject = new BehaviorSubject(false);
   public isAdmin$ = this.isAdminSubject.asObservable();
   public isAdmin = false;
+  
+  currenUrl = '';
+  previousUrl = '';
 
   constructor(private appService: AppService) {}
 

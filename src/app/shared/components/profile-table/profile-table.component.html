@@ -23,9 +23,9 @@
         <td mat-cell *matCellDef="let element">{{ element.profile_name }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="gender">
+      <ng-container matColumnDef="gendar">
         <th mat-header-cell *matHeaderCellDef>Gender</th>
-        <td mat-cell *matCellDef="let element">{{ element.gender }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.gendar }}</td>
       </ng-container>
 
       <ng-container matColumnDef="dob">
@@ -62,7 +62,17 @@
             aria-hidden="false"
             aria-label="Example home icon"
             (click)="gotoProfile(element)"
+            *ngIf="isAdmin"
             >edit</mat-icon
+          >
+          <mat-icon
+            title="edit"
+            class="remove_red_eye"
+            aria-hidden="false"
+            aria-label="Example home icon"            
+            (click)="gotoProfile(element)"
+            *ngIf="!isAdmin"
+            >remove_red_eye</mat-icon
           >
         </td>
       </ng-container>

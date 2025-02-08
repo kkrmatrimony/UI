@@ -15,12 +15,13 @@ export class profileTableComponent implements OnInit {
     console.log(value);
     this.dataSource.data = value;   
   }
+  @Input() isAdmin:boolean = false;
   @Output() updateEmit = new EventEmitter();
 
   dataSource = new MatTableDataSource(this.profileTableData);
   constructor(private router:Router){}
   ngOnInit(): void {
-   
+   console.log(this.isAdmin)
   }
 
 
@@ -28,7 +29,7 @@ export class profileTableComponent implements OnInit {
     
   }
 
-  displayedColumns: string[] = ['profile_name', 'gender','dob','marriage_status', 'citizenship','subscription_end_date', 'primary_contact', 'action'];
+  displayedColumns: string[] = ['profile_name', 'gendar','dob','marriage_status', 'citizenship','subscription_end_date', 'primary_contact', 'action'];
 
 
   applyFilter(filterValue: string) {

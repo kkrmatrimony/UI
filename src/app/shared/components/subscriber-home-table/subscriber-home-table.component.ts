@@ -41,7 +41,7 @@ export class SubscriberHomeTableComponent implements OnInit {
     //this.router.navigate(['/pet-consultation-home'], { state: apt });
   }
   gotoProfile(profile:any){
-    //this.router.navigate(['/profiles/create-profile'],{ state: profile });
+    this.router.navigate(['/profiles/create-profile'],{ state: profile });
   }
 
 }

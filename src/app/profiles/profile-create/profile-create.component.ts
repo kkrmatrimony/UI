@@ -3,8 +3,10 @@ import { UtilityService } from 'src/app/shared/services/utility.service';
 import { ProfileService } from '../profile.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from 'src/app/shared/info-dialog/info-dialog.component';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CommonService, RefType } from 'src/app/shared/services/common.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-profile-create',
@@ -299,15 +301,26 @@ export class ProfileCreateComponent implements OnInit {
     { label: 'ZWR', symbol: 'Z$', value: 'Zimbabwean dollar' },
   ];
 
+  previousUrl ='';
+  currentUrl = '';
+
+  isAdmin:boolean = false;
+
   constructor(
     private utility: UtilityService,
     private profileService: ProfileService,
     private commonService: CommonService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
+    
+  
+    this.authService.isAdmin$.subscribe(isAdmin=>{
+      this.isAdmin = isAdmin;
+    }); 
     if (history.state) {
       this.profile = history.state;
       this.profile.dob = this.utility.convertTodayTostr(this.profile.dob);
@@ -388,5 +401,14 @@ export class ProfileCreateComponent implements OnInit {
         this.router.navigate(['/profiles/home']);
       });
     });
+  }
+
+  goBack(){
+    if(this.authService.previousUrl.includes('profiles')){
+      this.router.navigate(['/profiles/home']);
+    } else {
+      this.router.navigate(['/home']);
+    }
+    
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../home.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 @Component({
@@ -10,8 +11,9 @@ import { HomeService } from '../home.service';
 export class SubscriberHomeComponent implements OnInit {
   
   myProfiles=[];
-  //last7dayscreatedprofiles=[];
-  constructor(private homeService:HomeService){
+  isAdmin:boolean=false;
+  
+  constructor(private homeService:HomeService, private authService:AuthService){
 
   }
 
@@ -19,9 +21,9 @@ export class SubscriberHomeComponent implements OnInit {
     this.homeService.profilesBySubscriberId().subscribe((res) => {
       this.myProfiles = res;
     });
-    // this.profileService.getProfiles(GetProfile.LAST7DAYSCREATION).subscribe((res) => {
-    //   this.last7dayscreatedprofiles = res;
-    // });
+    this.authService.isAdmin$.subscribe(isAdmin=>{
+      this.isAdmin = isAdmin;
+    }); 
   }
 
 
