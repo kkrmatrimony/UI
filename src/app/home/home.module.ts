@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { SubscriberHomeComponent } from './subscriber-home/subscriber-home.component';
+import { SubscriberSearchComponent } from './subscriber-search/subscriber-search.component';
 import { ServicesComponent } from './services/services.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeService } from './home.service';
@@ -16,6 +17,7 @@ import { MaterialModule } from '../material.module';
     AdminHomeComponent,
     ServicesComponent,
     SubscriberHomeComponent,
+    SubscriberSearchComponent
   ],
   imports: [
     CommonModule,

@@ -64,7 +64,23 @@
             (click)="gotoProfile(element)"
             >remove_red_eye</mat-icon
           >
+          
         </td>
+        </ng-container>
+
+        <ng-container matColumnDef="match" >
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element" >            
+            <mat-icon
+              title="edit"             
+              class="remove_red_eye"
+              aria-hidden="false"
+              aria-label="Example home icon"            
+              (click)="loadMatch(element)"
+              *ngIf="showMatchIcon"
+              >search</mat-icon
+            >
+          </td>
       </ng-container>
      
 

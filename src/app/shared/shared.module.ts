@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { profileTableComponent } from './components/profile-table/profile-table.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 import { SubscriberHomeTableComponent } from './components/subscriber-home-table/subscriber-home-table.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ForgotPasswordComponent,
     profileTableComponent,
     SubscriberHomeTableComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InfoDialogComponent,
     profileTableComponent,
     SubscriberHomeTableComponent,
+    CarouselComponent
   ],
 })
 export class SharedModule {}

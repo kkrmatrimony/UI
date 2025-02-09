@@ -1,4 +1,4 @@
-<div class="accordion" id="admin-home-accordion">
+<div class="accordion mt-3" id="admin-home-accordion" *ngIf="!showMatchTable">
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button
@@ -20,34 +20,14 @@
       <div class="accordion-body">
         <app-subscriber-home-table
           [profileTableData]="myProfiles"
+          (matchEmit)="matchEmitter($event)"
+          [showMatchIcon]="true"
         ></app-subscriber-home-table>
       </div>
     </div>
   </div>
   <br />
-  <!-- <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button
-        class="accordion-button collapsed"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseTwo"
-        aria-expanded="false"
-        aria-controls="collapseTwo"
-      >
-        Upcoming Renewals
-      </button>
-    </h2>
-    <div
-      id="collapseTwo"
-      class="accordion-collapse collapse"
-      data-bs-parent="#accordionExample"
-    >
-      <div class="accordion-body">
-        <app-profile-table
-          [profileTableData]="last10daysexpiringprofiles"
-        ></app-profile-table>
-      </div>
-    </div>
-  </div> -->
+</div>
+<div *ngIf="showMatchTable">
+  <app-subscriber-search [profile]="profile" (backToHome)="showMatchTable = false"></app-subscriber-search>
 </div>

@@ -30,10 +30,10 @@ export class HomeService {
     );
   }
 
-  // public profilesBySubscriberId(): Observable<any> {
-  //   let headers = new HttpHeaders();
-  //   headers.append('Content-Type', 'application/json');
-  //   return this.http.get(environment.localUrl + 'getprofilesBySubscriberId',
-  //     { headers: headers})
-  // }
+  public matchProfiles(params:any): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(environment.localUrl + 'matchprofiles',params,
+      { headers: headers})
+  }
 }

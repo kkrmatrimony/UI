@@ -3,29 +3,36 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-subscriber-home-table',
   templateUrl: './subscriber-home-table.component.html',
-  styleUrls: ['./subscriber-home-table.component.scss']
+  styleUrls: ['./subscriber-home-table.component.scss'],
 })
 export class SubscriberHomeTableComponent implements OnInit {
   @Input()
   set profileTableData(value: any) {
     console.log(value);
-    this.dataSource.data = value;   
+    this.dataSource.data = value;
   }
+  @Input() showMatchIcon = false;
   @Output() updateEmit = new EventEmitter();
+  @Output() matchEmit = new EventEmitter();
 
   dataSource = new MatTableDataSource(this.profileTableData);
-  constructor(private router:Router){}
-  ngOnInit(): void {
-   
-  }
-  
+  constructor(private router: Router) {}
+  ngOnInit(): void {}
 
-  displayedColumns: string[] = ['profile_name', 'gendar','dob','marriage_status', 'citizenship','subscription_end_date', 'primary_contact', 'action'];
-
+  displayedColumns: string[] = [
+    'profile_name',
+    'gendar',
+    'dob',
+    'marriage_status',
+    'citizenship',
+    'subscription_end_date',
+    'primary_contact',
+    'action',
+    'match',
+  ];
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -40,8 +47,11 @@ export class SubscriberHomeTableComponent implements OnInit {
   goToConsult(apt: any) {
     //this.router.navigate(['/pet-consultation-home'], { state: apt });
   }
-  gotoProfile(profile:any){
-    this.router.navigate(['/profiles/create-profile'],{ state: profile });
+  gotoProfile(profile: any) {
+    this.router.navigate(['/profiles/create-profile'], { state: profile });
   }
 
+  loadMatch(profile: any) {
+    this.matchEmit.emit(profile);
+  }
 }
