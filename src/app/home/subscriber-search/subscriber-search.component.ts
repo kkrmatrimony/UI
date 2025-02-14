@@ -4,6 +4,21 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { Profile } from 'src/app/shared/models/profile';
 import { CommonService, RefType } from 'src/app/shared/services/common.service';
 
+interface SearchProfile {
+  caste_sect: string;
+  subsect: string;
+  star_paadam: string;
+  gothram: string;
+  star: string;
+  rasi: string;
+  age_pref_from: 0;
+  age_pref_to: 0;
+  height_pref_from: string;
+  height_pref_to: string;
+  salary_preference: 0;
+  job_location: string;
+}
+
 @Component({
   selector: 'app-subscriber-search',
   templateUrl: './subscriber-search.component.html',
@@ -15,7 +30,7 @@ export class SubscriberSearchComponent implements OnInit {
 
   myProfiles = [];
   isAdmin: boolean = false;
-  searchProfile!: Profile;
+  searchProfile!: SearchProfile;
   gothramList = [] as RefType[];
   sectList = [] as RefType[];
   subsectList = [] as RefType[];
@@ -24,6 +39,8 @@ export class SubscriberSearchComponent implements OnInit {
   starPadamList = ['', 1, 2, 3, 4];
 
   matchedList: Profile[] = [];
+
+  filteredLocations!: string[];
 
   constructor(
     private homeService: HomeService,
@@ -46,11 +63,12 @@ export class SubscriberSearchComponent implements OnInit {
       gothram: '',
       star: '',
       rasi: '',
-      age_pref_from: 0,
-      age_pref_to: 0,
-      height_pref_from: '',
-      height_pref_to: '',
-      salary_preference: 0,
+      age_pref_from: this.profile.age_pref_from,
+      age_pref_to: this.profile.age_pref_to,
+      height_pref_from: this.profile.height_pref_from,
+      height_pref_to: this.profile.height_pref_to,
+      salary_preference: 0,      
+      job_location:''
     };
 
     this.commonService.getReferenceData('Gothram').subscribe((gothramList) => {
@@ -64,13 +82,18 @@ export class SubscriberSearchComponent implements OnInit {
     });
     this.commonService.getReferenceData('Star').subscribe((star) => {
       this.starList = star;
-    });
-    console.log(this.profile);
+    });    
     const params = { gendar: this.profile.gendar, age: this.profile.age };
     this.homeService.matchProfiles(params).subscribe((res) => {
       this.matchedList = res;
       this.tableData = res;
+
+      this.filteredLocations = [...new Set(this.matchedList.map(item => item.job_location??''))]; // [ 'A', 'B']
+
+      this.search();
     });
+
+   
   }
 
   changeSect(sect: string) {
@@ -81,7 +104,7 @@ export class SubscriberSearchComponent implements OnInit {
 
   tableData: Profile[] = [];
 
-  search() {    
+  search() {
     const filteredResult = this.matchedList.filter((item) => {
       return (
         (this.searchProfile.gothram === '' ||
@@ -95,14 +118,31 @@ export class SubscriberSearchComponent implements OnInit {
           item.caste_sect.toLowerCase() ===
             this.searchProfile.caste_sect.toLowerCase()) &&
         (this.searchProfile.subsect === '' ||
-          item.subsect.toLowerCase() ===
+          item.subsect?.toLowerCase() ===
             this.searchProfile.subsect.toLowerCase()) &&
         (this.searchProfile.star_paadam === '' ||
           item.star_paadam.toLowerCase() ===
             this.searchProfile.star_paadam.toLowerCase()) &&
         (this.searchProfile.salary_preference === 0 ||
-          item.salary_preference === this.searchProfile.salary_preference)
+          item.salary_preference === this.searchProfile.salary_preference) &&
+          (this.searchProfile.job_location === '' ||
+            item.job_location === this.searchProfile.job_location) &&
+        (this.searchProfile.height_pref_from === '' ||
+          parseFloat(item.height) >=
+            parseFloat(this.searchProfile.height_pref_from)) &&
+        (this.searchProfile.height_pref_to === '' ||
+          parseFloat(item.height) <
+            parseFloat(this.searchProfile.height_pref_to)) &&
+        (this.searchProfile.age_pref_from === 0 || this.searchProfile.age_pref_from === null ||
+          (this.profile.gendar === 'M'?item.age<= (this.profile.age - this.searchProfile.age_pref_from): (this.searchProfile.age_pref_from === 0 ||
+                item.age<= (this.profile.age + this.searchProfile.age_pref_from)))) &&
+        (this.searchProfile.age_pref_to === 0 || this.searchProfile.age_pref_to === null ||
+                //item.age>= (this.profile.age - this.searchProfile.age_pref_to)
+                (this.profile.gendar === 'M'?item.age>= (this.profile.age - this.searchProfile.age_pref_to): (this.searchProfile.age_pref_to === 0 ||
+                  item.age>= (this.profile.age + this.searchProfile.age_pref_to))))
       );
+
+      
 
       // Add more fields as needed
     });
@@ -122,10 +162,11 @@ export class SubscriberSearchComponent implements OnInit {
       height_pref_from: '',
       height_pref_to: '',
       salary_preference: 0,
+      job_location:''
     };
     this.tableData = this.matchedList;
   }
-  home(){
+  home() {
     this.backToHome.emit();
   }
 }

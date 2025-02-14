@@ -4,7 +4,7 @@ export interface Profile {
   gendar?: string;
   profile_type?: string;
   dob?: string;
-  age?: 0;
+  age: 0;
   caste_sect: string;
   subsect: string;
   add_subsect?: string;
@@ -18,7 +18,7 @@ export interface Profile {
   annual_income?: 0;
   job_location?: string;
   job_country?: string;
-  height?: string;
+  height: string;
   weight?: string;
   father_detail?: string;
   mother_detail?: string;
@@ -34,10 +34,10 @@ export interface Profile {
   agree_inform_exit?: string;
   self_declaration?: string;
   star: string;
-  age_pref_from?: 0;
-  age_pref_to?: 0;
-  height_pref_from?: string;
-  height_pref_to?: string;
+  age_pref_from: 0;
+  age_pref_to: 0;
+  height_pref_from: string;
+  height_pref_to: string;
   marriage_status?: string;
   profile_for?: string;
   created_by?: string;

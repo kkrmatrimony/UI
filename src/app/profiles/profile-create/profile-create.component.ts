@@ -83,7 +83,7 @@ export class ProfileCreateComponent implements OnInit {
   ];
   type = [
     {
-      value: 'INDIAN',
+      value: 'Indian',
       label: 'Indian',
     },
     {
@@ -301,10 +301,10 @@ export class ProfileCreateComponent implements OnInit {
     { label: 'ZWR', symbol: 'Z$', value: 'Zimbabwean dollar' },
   ];
 
-  previousUrl ='';
+  previousUrl = '';
   currentUrl = '';
 
-  isAdmin:boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
     private utility: UtilityService,
@@ -312,20 +312,14 @@ export class ProfileCreateComponent implements OnInit {
     private commonService: CommonService,
     private dialog: MatDialog,
     private router: Router,
-    private authService:AuthService
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    
-  
-    this.authService.isAdmin$.subscribe(isAdmin=>{
+    this.authService.isAdmin$.subscribe((isAdmin) => {
       this.isAdmin = isAdmin;
-    }); 
-    if (history.state) {
-      this.profile = history.state;
-      this.profile.dob = this.utility.convertTodayTostr(this.profile.dob);
-      this.profile.age = this.utility.getAge(this.profile.dob);
-    }
+    });
+
     this.commonService.getReferenceData('Pfor').subscribe((pfor) => {
       this.profileFor = pfor;
     });
@@ -353,6 +347,20 @@ export class ProfileCreateComponent implements OnInit {
     this.profile.agree_inform_exit = 'Y';
     this.profile.agree_inform_marriage = 'Y';
     this.profile.self_declaration = 'Y';
+
+    if (history.state && history.state.profile_code) {
+      this.profile = history.state;
+      this.profile.dob = this.utility.convertTodayTostr(this.profile.dob);
+      this.profile.age = this.utility.getAge(this.profile.dob);
+      this.changeSect(this.profile.caste_sect);
+    } else {
+      this.profile.marriage_status = 'UnMarried';
+      this.profile.mother_tongue = 'Tamil';
+      this.profile.citizenship = 'Indian';
+      this.profile.salary_currency = 'INR';
+      this.profile.caste_sect = 'Iyer';
+      this.changeSect('Iyer');
+    }
 
     this.commonService.getSubscriberIds().subscribe((response) => {
       this.subscriberIdList = response.data;
@@ -391,6 +399,10 @@ export class ProfileCreateComponent implements OnInit {
     this.profile.updated_by = JSON.parse(
       localStorage.getItem('user') || '{}'
     ).subscriber_id;
+    this.checkForEmpty();
+    if (this.profile.primary_contact === '') {
+      this.profile.primary_contact = null;
+    }
     this.profileService.saveProfile(this.profile).subscribe((data) => {
       const dialogRef = this.dialog.open(InfoDialogComponent, {
         width: '500px',
@@ -403,12 +415,19 @@ export class ProfileCreateComponent implements OnInit {
     });
   }
 
-  goBack(){
-    if(this.authService.previousUrl.includes('profiles')){
+  goBack() {
+    if (this.authService.previousUrl.includes('profiles')) {
       this.router.navigate(['/profiles/home']);
     } else {
       this.router.navigate(['/home']);
     }
-    
+  }
+
+  checkForEmpty() {
+    for (let key in this.profile) {
+      if (this.profile[key] === '') {
+        this.profile[key] = null;
+      }
+    }
   }
 }

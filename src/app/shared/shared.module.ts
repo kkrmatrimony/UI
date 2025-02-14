@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { profileTableComponent } from './components/profile-table/profile-table.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { SubscriberHomeTableComponent } from './components/subscriber-home-table/subscriber-home-table.component';
+import {SubscriberSearchTableComponent} from './components/subscriber-search-table/subscriber-search-table.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ForgotPasswordComponent,
     profileTableComponent,
     SubscriberHomeTableComponent,
+    SubscriberSearchTableComponent,
     CarouselComponent
   ],
   imports: [
@@ -41,7 +43,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InfoDialogComponent,
     profileTableComponent,
     SubscriberHomeTableComponent,
-    CarouselComponent
+    CarouselComponent,
+    SubscriberSearchTableComponent
   ],
 })
 export class SharedModule {}
