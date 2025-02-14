@@ -8,8 +8,7 @@ import { AppService } from 'src/app/app.service';
 export class AuthService {
   private isAuthenticated = false;
   private isAdminSubject = new BehaviorSubject(false);
-  public isAdmin$ = this.isAdminSubject.asObservable();
-  public isAdmin = false;
+  public isAdmin$ = this.isAdminSubject.asObservable();  
   
   currenUrl = '';
   previousUrl = '';
@@ -22,10 +21,7 @@ export class AuthService {
 
   login(userRes: any) {
     localStorage.setItem('user', JSON.stringify(userRes));
-    this.isAuthenticated = true;
-    console.log(
-      JSON.parse(localStorage.getItem('user') || '{}').user_type === 'A'
-    );
+    this.isAuthenticated = true;    
     this.appService.setLogin(true);
     if (JSON.parse(localStorage.getItem('user') || '{}').user_type === 'A') {
       this.isAdminSubject.next(true);

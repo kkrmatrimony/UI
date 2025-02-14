@@ -67,8 +67,8 @@ export class SubscriberSearchComponent implements OnInit {
       age_pref_to: this.profile.age_pref_to,
       height_pref_from: this.profile.height_pref_from,
       height_pref_to: this.profile.height_pref_to,
-      salary_preference: 0,      
-      job_location:''
+      salary_preference: 0,
+      job_location: '',
     };
 
     this.commonService.getReferenceData('Gothram').subscribe((gothramList) => {
@@ -82,18 +82,18 @@ export class SubscriberSearchComponent implements OnInit {
     });
     this.commonService.getReferenceData('Star').subscribe((star) => {
       this.starList = star;
-    });    
+    });
     const params = { gendar: this.profile.gendar, age: this.profile.age };
     this.homeService.matchProfiles(params).subscribe((res) => {
       this.matchedList = res;
       this.tableData = res;
 
-      this.filteredLocations = [...new Set(this.matchedList.map(item => item.job_location??''))]; // [ 'A', 'B']
+      this.filteredLocations = [
+        ...new Set(this.matchedList.map((item) => item.job_location ?? '')),
+      ]; // [ 'A', 'B']
 
       this.search();
     });
-
-   
   }
 
   changeSect(sect: string) {
@@ -125,24 +125,28 @@ export class SubscriberSearchComponent implements OnInit {
             this.searchProfile.star_paadam.toLowerCase()) &&
         (this.searchProfile.salary_preference === 0 ||
           item.salary_preference === this.searchProfile.salary_preference) &&
-          (this.searchProfile.job_location === '' ||
-            item.job_location === this.searchProfile.job_location) &&
+        (this.searchProfile.job_location === '' ||
+          item.job_location === this.searchProfile.job_location) &&
         (this.searchProfile.height_pref_from === '' ||
+          this.searchProfile.height_pref_from === null ||
           parseFloat(item.height) >=
             parseFloat(this.searchProfile.height_pref_from)) &&
         (this.searchProfile.height_pref_to === '' ||
-          parseFloat(item.height) <
+          this.searchProfile.height_pref_to === null ||
+          parseFloat(item.height) <=
             parseFloat(this.searchProfile.height_pref_to)) &&
-        (this.searchProfile.age_pref_from === 0 || this.searchProfile.age_pref_from === null ||
-          (this.profile.gendar === 'M'?item.age<= (this.profile.age - this.searchProfile.age_pref_from): (this.searchProfile.age_pref_from === 0 ||
-                item.age<= (this.profile.age + this.searchProfile.age_pref_from)))) &&
-        (this.searchProfile.age_pref_to === 0 || this.searchProfile.age_pref_to === null ||
-                //item.age>= (this.profile.age - this.searchProfile.age_pref_to)
-                (this.profile.gendar === 'M'?item.age>= (this.profile.age - this.searchProfile.age_pref_to): (this.searchProfile.age_pref_to === 0 ||
-                  item.age>= (this.profile.age + this.searchProfile.age_pref_to))))
+        (this.searchProfile.age_pref_from === 0 ||
+          this.searchProfile.age_pref_from === null ||
+          (this.profile.gendar === 'M'
+            ? item.age <= this.profile.age - this.searchProfile.age_pref_from
+            : item.age >=
+              this.profile.age + this.searchProfile.age_pref_from)) &&
+        (this.searchProfile.age_pref_to === 0 ||
+          this.searchProfile.age_pref_to === null ||
+          (this.profile.gendar === 'M'
+            ? item.age >= this.profile.age - this.searchProfile.age_pref_to
+            : item.age <= this.profile.age + this.searchProfile.age_pref_to))
       );
-
-      
 
       // Add more fields as needed
     });
@@ -162,7 +166,7 @@ export class SubscriberSearchComponent implements OnInit {
       height_pref_from: '',
       height_pref_to: '',
       salary_preference: 0,
-      job_location:''
+      job_location: '',
     };
     this.tableData = this.matchedList;
   }
