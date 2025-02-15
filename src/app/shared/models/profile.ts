@@ -1,4 +1,5 @@
 export interface Profile {
+  profile_code?:string;
   profile_source?: string;
   profile_name?: string;
   gendar?: string;

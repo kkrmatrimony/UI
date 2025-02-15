@@ -170,7 +170,21 @@ export class SubscriberSearchComponent implements OnInit {
     };
     this.tableData = this.matchedList;
   }
+
   home() {
     this.backToHome.emit();
+  }
+
+  shortListProfile(shortListParam: any) {
+    const params = {
+      src_profile_source: this.profile.profile_source,
+      src_profile_code: this.profile.profile_code,
+      tgt_profile_source: shortListParam.profile_source,
+      tgt_profile_code: shortListParam.profile_code,
+      status: 'S',
+    };
+    this.homeService.shortListProfile(params).subscribe((res) => {
+      alert('shortlisted');
+    });
   }
 }

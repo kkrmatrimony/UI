@@ -139,6 +139,106 @@
 
       <div class="row mt-2">
         <hr class="mt-10" />
+        <h3>Community Details</h3>
+        
+
+        <div class="form-group col-lg-2">
+          <label for="gothram">Gothram</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="profile.gothram"
+          >
+            <option
+              *ngFor="let option of gothramList"
+              [value]="option.ref_code"
+            >
+              {{ option.ref_desc }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label for="caste_sect">Sect</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="profile.caste_sect"
+            (change)="changeSect(profile.caste_sect)"
+          >
+            <option *ngFor="let option of sectList" [value]="option.ref_code">
+              {{ option.ref_desc }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label for="subsect">Sub Sect</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="profile.subsect"
+            [disabled]="subsectList.length === 0"
+          >
+            <option
+              *ngFor="let option of subsectList"
+              [value]="option.ref_code"
+            >
+              {{ option.ref_desc }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-lg-2">
+          <label for="star">Star</label>
+          <select
+            id="star"
+            name="star"
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="profile.star"
+          >
+            <option *ngFor="let option of starList" [value]="option.ref_code">
+              {{ option.ref_desc }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label for="star_paadam">Star Padam</label>
+          <select
+            id="star_paadam"
+            name="star_paadam"
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="profile.star_paadam"
+          >
+            <option *ngFor="let option of starPadamList" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+        </div>
+        
+        <div class="form-group col-lg-2">
+          <label for="rasi">Rasi</label>
+          <select
+            id="rasi"
+            name="rasi"
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="profile.rasi"
+          >
+            <option *ngFor="let option of rasiList" [value]="option.ref_code">
+              {{ option.ref_desc }}
+            </option>
+          </select>
+        </div>
+
+        
+        
+      </div>
+
+      <div class="row mt-2">
+        <hr class="mt-10" />
         <h3>Professional Details</h3>
         <div class="form-group col-lg-2">
           <label for="education">Education Qualification</label>
@@ -180,6 +280,24 @@
             name="country"
           />
         </div>
+        
+        <div class="form-group col-lg-2">
+          <label for="annual_income">Annual Income</label>
+          <div class="input-group">
+            <!-- <div class="input-group-append">
+                            <span class="input-group-text">Rs.</span>
+                        </div> -->
+
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="profile.annual_income"
+              id="annual_income"
+              name="annual_income"
+            />
+          </div>
+        </div>
+
         <div class="form-group col-md-2 currency-input">
           <label for="currency">Currency</label>
           <select
@@ -197,22 +315,6 @@
         </div>
 
         <div class="form-group col-lg-2">
-          <label for="annual_income">Annual Income</label>
-          <div class="input-group">
-            <!-- <div class="input-group-append">
-                            <span class="input-group-text">Rs.</span>
-                        </div> -->
-
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="profile.annual_income"
-              id="annual_income"
-              name="annual_income"
-            />
-          </div>
-        </div>
-        <div class="form-group col-lg-2">
           <label for="citizenship">Citizenship</label>
           <select
             class="form-select"
@@ -225,111 +327,8 @@
           </select>
         </div>
       </div>
-
-      <!-- <div class="form-group col-lg-2">
-                    <label for="profile_type">Type</label>
-                    <select
-                        class="form-select"
-                        aria-label="Default select example"
-                        [(ngModel)]="profile.profile_type"
-                    >
-                        <option *ngFor="let option of type" [value]="option.value">
-                        {{ option.label }}
-                        </option>
-                    </select>
-                </div> -->
-      <div class="row mt-2">
-        <hr class="mt-10" />
-        <h3>Community Details</h3>
-        <div class="form-group col-lg-2">
-          <label for="gothram">Gothram</label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.gothram"
-          >
-            <option
-              *ngFor="let option of gothramList"
-              [value]="option.ref_code"
-            >
-              {{ option.ref_desc }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="caste_sect">Sect</label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.caste_sect"
-            (change)="changeSect(profile.caste_sect)"
-          >
-            <option *ngFor="let option of sectList" [value]="option.ref_code">
-              {{ option.ref_desc }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group col-lg-2">
-          <label for="subsect">Sub Sect</label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.subsect"
-            [disabled]="subsectList.length === 0"
-          >
-            <option
-              *ngFor="let option of subsectList"
-              [value]="option.ref_code"
-            >
-              {{ option.ref_desc }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="rasi">Rasi</label>
-          <select
-            id="rasi"
-            name="rasi"
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.rasi"
-          >
-            <option *ngFor="let option of rasiList" [value]="option.ref_code">
-              {{ option.ref_desc }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-lg-2">
-          <label for="star">Star</label>
-          <select
-            id="star"
-            name="star"
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.star"
-          >
-            <option *ngFor="let option of starList" [value]="option.ref_code">
-              {{ option.ref_desc }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group col-lg-2">
-          <label for="star_paadam">Star Padam</label>
-          <select
-            id="star_paadam"
-            name="star_paadam"
-            class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="profile.star_paadam"
-          >
-            <option *ngFor="let option of starPadamList" [value]="option">
-              {{ option }}
-            </option>
-          </select>
-        </div>
-      </div>
+      
+      
     </div>
 
     <div class="row mt-3">

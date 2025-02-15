@@ -36,4 +36,11 @@ export class HomeService {
     return this.http.post(environment.localUrl + 'matchprofiles',params,
       { headers: headers})
   }
+
+  shortListProfile(params:any):Observable<any>{
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(environment.localUrl + 'shortListProfile',params,
+      { headers: headers})
+  }
 }

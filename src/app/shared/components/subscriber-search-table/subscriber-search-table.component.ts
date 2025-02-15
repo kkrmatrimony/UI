@@ -15,7 +15,7 @@ export class SubscriberSearchTableComponent implements OnInit {
     this.dataSource.data = value;
   }
   @Input() showMatchIcon = false;
-  @Output() updateEmit = new EventEmitter();
+  @Output() shortlistEmit = new EventEmitter();
   @Output() matchEmit = new EventEmitter();
 
   dataSource = new MatTableDataSource(this.profileTableData);
@@ -31,7 +31,7 @@ export class SubscriberSearchTableComponent implements OnInit {
     'subscription_end_date',
     'primary_contact',
     'action',
-    'match',
+    'sortlist',
   ];
 
   applyFilter(filterValue: string) {
@@ -44,8 +44,8 @@ export class SubscriberSearchTableComponent implements OnInit {
     //this.router.navigate(['/apt-booking'], { state: value });
   }
 
-  goToConsult(apt: any) {
-    //this.router.navigate(['/pet-consultation-home'], { state: apt });
+  shortList(profile: any) {
+    this.shortlistEmit.emit({profile_source:profile.profile_source, profile_code:profile.profile_code})
   }
   gotoProfile(profile: any) {
     this.router.navigate(['/profiles/create-profile'], { state: profile });
