@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
   selector: 'app-subscriber-home-table',
@@ -19,7 +20,7 @@ export class SubscriberHomeTableComponent implements OnInit {
   @Output() matchEmit = new EventEmitter();
 
   dataSource = new MatTableDataSource(this.profileTableData);
-  constructor(private router: Router) {}
+  constructor(private router: Router,private us:UtilityService) {}
   ngOnInit(): void {}
 
   displayedColumns: string[] = [
@@ -40,13 +41,10 @@ export class SubscriberHomeTableComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  edit_apt(value: any) {
-    //this.router.navigate(['/apt-booking'], { state: value });
+  formatDate(date:any){
+    return this.us.convertTodayTostrDDMMYYYY(date)
   }
-
-  goToConsult(apt: any) {
-    //this.router.navigate(['/pet-consultation-home'], { state: apt });
-  }
+  
   gotoProfile(profile: any) {
     this.router.navigate(['/profiles/create-profile'], { state: profile });
   }
