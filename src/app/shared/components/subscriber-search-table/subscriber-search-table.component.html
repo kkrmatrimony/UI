@@ -35,7 +35,9 @@
 
       <ng-container matColumnDef="marriage_status">
         <th mat-header-cell *matHeaderCellDef>Marriage Status</th>
-        <td mat-cell *matCellDef="let element">{{ element.marriage_status }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.marriage_status }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="citizenship">
@@ -45,12 +47,16 @@
 
       <ng-container matColumnDef="subscription_end_date">
         <th mat-header-cell *matHeaderCellDef>Valid Upto</th>
-        <td mat-cell *matCellDef="let element">{{ element.subscription_end_date }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.subscription_end_date }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="primary_contact">
         <th mat-header-cell *matHeaderCellDef>Phone</th>
-        <td mat-cell *matCellDef="let element">{{ element.primary_contact }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.primary_contact }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="action">
@@ -60,22 +66,32 @@
             title="edit"
             class="remove_red_eye"
             aria-hidden="false"
-            aria-label="Example home icon"            
+            aria-label="Example home icon"
             (click)="gotoProfile(element)"
             >remove_red_eye</mat-icon
           >
-          
         </td>
-        </ng-container>
-
-        <ng-container matColumnDef="sortlist" >
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element" >            
-            <button class="btn btn-primary" (click)="shortList(element)">Shortlist</button>
-            
-          </td>
       </ng-container>
-     
+
+      <ng-container matColumnDef="sortlist">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            class="btn btn-primary"
+            *ngIf="element.action === 'Delist'"
+            (click)="delist(element)"
+          >
+            Delist
+          </button>
+          <button
+            class="btn btn-primary"
+            *ngIf="element.action === 'Shortlist'"
+            (click)="shortList(element)"
+          >
+            Shortlist
+          </button>
+        </td>
+      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

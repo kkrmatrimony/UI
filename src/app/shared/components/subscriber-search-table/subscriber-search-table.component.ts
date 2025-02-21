@@ -45,8 +45,21 @@ export class SubscriberSearchTableComponent implements OnInit {
   }
 
   shortList(profile: any) {
-    this.shortlistEmit.emit({profile_source:profile.profile_source, profile_code:profile.profile_code})
+    this.shortlistEmit.emit({
+      profile_source: profile.profile_source,
+      profile_code: profile.profile_code,
+      shortList: true,
+    });
   }
+
+  delist(profile: any) {
+    this.shortlistEmit.emit({
+      profile_source: profile.profile_source,
+      profile_code: profile.profile_code,
+      shortList: false,
+    });
+  }
+
   gotoProfile(profile: any) {
     this.router.navigate(['/profiles/create-profile'], { state: profile });
   }

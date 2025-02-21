@@ -49,9 +49,9 @@ export class SubscriberSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.homeService.profilesBySubscriberId().subscribe((res) => {
-      this.myProfiles = res;
-    });
+    // this.homeService.profilesBySubscriberId().subscribe((res) => {
+    //   this.myProfiles = res;
+    // });
     this.authService.isAdmin$.subscribe((isAdmin) => {
       this.isAdmin = isAdmin;
     });
@@ -83,7 +83,16 @@ export class SubscriberSearchComponent implements OnInit {
     this.commonService.getReferenceData('Star').subscribe((star) => {
       this.starList = star;
     });
-    const params = { gendar: this.profile.gendar, age: this.profile.age };
+    this.matchprofilesSearch();
+  }
+
+  matchprofilesSearch() {
+    const params = {
+      gendar: this.profile.gendar,
+      age: this.profile.age,
+      star: this.profile.star,
+      profile_code: this.profile.profile_code,
+    };
     this.homeService.matchProfiles(params).subscribe((res) => {
       this.matchedList = res;
       this.tableData = res;
@@ -176,15 +185,29 @@ export class SubscriberSearchComponent implements OnInit {
   }
 
   shortListProfile(shortListParam: any) {
+    if (shortListParam.shortList) {
+      const params = {
+        src_profile_source: this.profile.profile_source,
+        src_profile_code: this.profile.profile_code,
+        tgt_profile_source: shortListParam.profile_source,
+        tgt_profile_code: shortListParam.profile_code,
+        status: shortListParam.shortList ? 'S' : null,
+      };
+      this.homeService.shortListProfile(params).subscribe((res) => {
+        this.matchprofilesSearch();
+      });
+    } else {
+      this.removeShortListProfile(shortListParam);
+    }
+  }
+
+  removeShortListProfile(shortListParam: any) {
     const params = {
-      src_profile_source: this.profile.profile_source,
       src_profile_code: this.profile.profile_code,
-      tgt_profile_source: shortListParam.profile_source,
       tgt_profile_code: shortListParam.profile_code,
-      status: 'S',
     };
-    this.homeService.shortListProfile(params).subscribe((res) => {
-      alert('shortlisted');
+    this.homeService.removeShortListProfile(params).subscribe((res) => {
+      this.matchprofilesSearch();
     });
   }
 }

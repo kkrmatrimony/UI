@@ -24,7 +24,9 @@ export class HomeService {
     return this.http.post(
       environment.localUrl + 'getprofilesBySubscriberId',
       {
-        subscriber_id: 'KKKR00002',
+        subscriber_id: JSON.parse(
+          localStorage.getItem('user') || '{}'
+        ).subscriber_id,
       },
       { headers: headers }
     );
@@ -41,6 +43,13 @@ export class HomeService {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(environment.localUrl + 'shortListProfile',params,
+      { headers: headers})
+  }
+
+  removeShortListProfile(params:any):Observable<any>{
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(environment.localUrl + 'removeShortListProfile',params,
       { headers: headers})
   }
 }
