@@ -32,6 +32,16 @@ export class HomeService {
     );
   }
 
+  public shortlistings(params:any): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(
+      environment.localUrl + 'shortlistings',
+      params,
+      { headers: headers }
+    );
+  }
+
   public matchProfiles(params:any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

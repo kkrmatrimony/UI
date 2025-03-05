@@ -114,23 +114,24 @@ export class SubscriberSearchComponent implements OnInit {
   tableData: Profile[] = [];
 
   search() {
-    const filteredResult = this.matchedList.filter((item) => {
+    const filteredResult = this.matchedList.filter((item) => {    
+
       return (
-        (this.searchProfile.gothram === '' ||
-          item.gothram.toLowerCase() ===
+        (this.searchProfile.gothram === '' || 
+          item.gothram?.toLowerCase() ===
             this.searchProfile.gothram.toLowerCase()) &&
         (this.searchProfile.rasi === '' ||
-          item.rasi.toLowerCase() === this.searchProfile.rasi.toLowerCase()) &&
+          item.rasi?.toLowerCase() === this.searchProfile.rasi.toLowerCase()) &&
         (this.searchProfile.star === '' ||
-          item.star.toLowerCase() === this.searchProfile.star.toLowerCase()) &&
+          item.star?.toLowerCase() === this.searchProfile.star.toLowerCase()) &&
         (this.searchProfile.caste_sect === '' ||
-          item.caste_sect.toLowerCase() ===
+          item.caste_sect?.toLowerCase() ===
             this.searchProfile.caste_sect.toLowerCase()) &&
         (this.searchProfile.subsect === '' ||
           item.subsect?.toLowerCase() ===
             this.searchProfile.subsect.toLowerCase()) &&
         (this.searchProfile.star_paadam === '' ||
-          item.star_paadam.toLowerCase() ===
+          item.star_paadam?.toLowerCase() ===
             this.searchProfile.star_paadam.toLowerCase()) &&
         (this.searchProfile.salary_preference === 0 ||
           item.salary_preference === this.searchProfile.salary_preference) &&

@@ -10,7 +10,8 @@ import { CommonService, RefType } from 'src/app/shared/services/common.service';
   styleUrls: ['./subscriber-home.component.scss'],
 })
 export class SubscriberHomeComponent implements OnInit {
-  myProfiles = [];
+  myProfiles:Profile[] = [];
+  shortlistings:Profile[] = [];
   isAdmin: boolean = false;
   showMatchTable = false;
   profile!: Profile;  
@@ -24,7 +25,12 @@ export class SubscriberHomeComponent implements OnInit {
     
     this.homeService.profilesBySubscriberId().subscribe((res) => {
       this.myProfiles = res;
+      this.homeService.shortlistings({profile_code:this.myProfiles[0].profile_code}).subscribe((res) => {
+        this.shortlistings = res;
+      });
     });
+
+    
     this.authService.isAdmin$.subscribe((isAdmin) => {
       this.isAdmin = isAdmin;
     });

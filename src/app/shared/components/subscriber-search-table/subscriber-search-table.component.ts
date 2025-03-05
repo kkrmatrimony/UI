@@ -15,7 +15,7 @@ export class SubscriberSearchTableComponent implements OnInit {
     console.log(value);
     this.dataSource.data = value;
   }
-  @Input() showMatchIcon = false;
+  @Input() showListingAction = false;
   @Output() shortlistEmit = new EventEmitter();
   @Output() matchEmit = new EventEmitter();
 

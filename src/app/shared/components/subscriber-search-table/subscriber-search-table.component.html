@@ -103,14 +103,14 @@
         <td mat-cell *matCellDef="let element">
           <button
             class="btn btn-primary"
-            *ngIf="element.action === 'Delist'"
+            *ngIf="showListingAction && element.action === 'Delist'"
             (click)="delist(element)"
           >
             Delist
           </button>
           <button
             class="btn btn-primary"
-            *ngIf="element.action === 'Shortlist'"
+            *ngIf="showListingAction && element.action === 'Shortlist'"
             (click)="shortList(element)"
           >
             Shortlist
